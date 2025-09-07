@@ -1,5 +1,6 @@
 from .count_in_list import count_in_list
 
+
 def main():
     """Main entry point for count_in_list package"""
     lst = ["toto", "tata", "toto"]

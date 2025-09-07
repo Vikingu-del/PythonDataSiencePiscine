@@ -2,6 +2,7 @@ import typing as t
 
 any = t.Any
 
+
 def all_thing_is_obj(object: any) -> int:
     if isinstance(object, int):
         print("Type not found")
@@ -10,6 +11,7 @@ def all_thing_is_obj(object: any) -> int:
     else:
         print(f"{type(object).__name__.capitalize()} : {type(object)}")
     return 42
+
 
 if __name__ == "__main__":
     pass

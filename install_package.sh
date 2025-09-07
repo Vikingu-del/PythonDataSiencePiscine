@@ -28,11 +28,12 @@ cd "$PACKAGE_PATH" || exit 1
 
 # Build package
 echo "Building package: $PACKAGE_NAME..."
-python setup.py bdist_wheel sdist
+python -m build
+# python setup.py bdist_wheel sdist # --- using setup.py
 # python -m build
 
 
 # Install package
 echo "Installing package: $PACKAGE_NAME..."
-pip install dist/ft_package-0.0.10.tar.gz
-#pip install ./dist/ft_package-0.0.10-py3-none-any.whl
+pip install ./dist/ft_package-0.0.1.tar.gz
+#pip install ./dist/ft_package-0.0.1-py3-none-any.whl

@@ -41,24 +41,24 @@ echo "=== Checking package: $PACKAGE_NAME structure ==="
 echo "Directory Structure:"
 tree -a --noreport
 
-echo -e "\n=== Checking setup.py ==="
-if [ -f "setup.py" ]; then
-    echo "Package metadata:"
-    python setup.py --name --version --description
+# echo -e "\n=== Checking setup.py ==="
+# if [ -f "setup.py" ]; then
+#     echo "Package metadata:"
+#     python setup.py --name --version --description
 
-    echo -e "\nPackage dependencies:"
-    grep "install_requires" setup.py
-    grep "extras_require" setup.py
+#     echo -e "\nPackage dependencies:"
+#     grep "install_requires" setup.py
+#     grep "extras_require" setup.py
 
-    echo -e "\nPackage structure:"
-    python -c "from setuptools import find_packages; print(find_packages())"
+#     echo -e "\nPackage structure:"
+#     python -c "from setuptools import find_packages; print(find_packages())"
 
-    echo -e "\nEntry points:"
-    grep -A 5 "entry_points" setup.py
-else
-    echo "Error: setup.py not found in $PACKAGE_PATH."
-    exit 1
-fi
+#     echo -e "\nEntry points:"
+#     grep -A 5 "entry_points" setup.py
+# else
+#     echo "Error: setup.py not found in $PACKAGE_PATH."
+#     exit 1
+# fi
 
 echo -e "\n=== Checking package import paths ==="
 python -c "import sys; print('\n'.join(sys.path))"
@@ -71,7 +71,7 @@ for pkg in "${required_packages[@]}"; do
         pip install "$pkg"
     fi
 done
-python setup.py check --strict --metadata --verbose
+# python setup.py check --strict --metadata --verbose
 
 # Check README.md formatting directly
 echo -e "\n=== Checking README.md format ==="
@@ -96,7 +96,7 @@ python -m build --wheel --no-isolation --outdir /tmp/build_check . && \
     echo "Build check passed successfully" && \
     rm -rf /tmp/build_check || \
     echo "Build check failed"
-    cd $HOME/pythonDataSience/ || exit 1
+    cd $HOME/PythonDataSiencePiscine/ || exit 1
     # Running pip install with --dry-run --ignore-installed --verbose
     pip install --dry-run --ignore-installed --verbose $PACKAGE_PATH
     ./clean_package.sh "$PACKAGE_NAME" "$PACKAGE_PATH"

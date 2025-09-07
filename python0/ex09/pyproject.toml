@@ -1,0 +1,25 @@
+[build-system]
+requires = ["pip==21.3.1", "setuptools==75.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ft_package"
+version = "0.0.1"
+description = "A sample test package"
+readme = "README.md"
+license = { text = "MIT" }
+# license = "MIT"
+# license-files = ["LICENSE"]
+authors = [{name = "eseferi"}, {email="esefer@42.fr"}]
+# urls = 
+
+# classifiers = [
+#   "License :: OSI Approved :: MIT License",
+#   "Programming Language :: Python :: 3.10.13",
+#   "Operating System :: OS Independent"
+# ]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+# the commente lines are for metadata version 2.4

@@ -1,4 +1,3 @@
-import sys as s
 from ft_filter import ft_filter
 
 
