@@ -10,8 +10,8 @@ readme = "README.md"
 license = { text = "MIT" }
 # license = "MIT"
 # license-files = ["LICENSE"]
-authors = [{name = "eseferi"}, {email="esefer@42.fr"}]
-# urls = 
+authors = [{name = "eseferi"}, {email="eseferi@42.fr"}]
+urls = { Homepage = "https://github.com/eseferi/ft_package" }
 
 # classifiers = [
 #   "License :: OSI Approved :: MIT License",
@@ -21,5 +21,12 @@ authors = [{name = "eseferi"}, {email="esefer@42.fr"}]
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
+
+[tool.pytest.ini_options]
+python_files = ["test.py", "test_*.py"]
+
+# [tool.setuptools.packages.find]
+# where = ["."]
+# include = ["ft_package*"]
 
 # the commente lines are for metadata version 2.4

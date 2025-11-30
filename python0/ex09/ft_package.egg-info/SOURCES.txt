@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+ft_package/__init__.py
+ft_package.egg-info/PKG-INFO
+ft_package.egg-info/SOURCES.txt
+ft_package.egg-info/dependency_links.txt
+ft_package.egg-info/top_level.txt
+ft_package/count_in_list/__init__.py
+ft_package/count_in_list/__main__.py
+ft_package/count_in_list/count_in_list.py
+tests/test.py

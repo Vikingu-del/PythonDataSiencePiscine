@@ -1,4 +1,3 @@
-import math as m
 import typing as t
 
 
@@ -7,8 +6,8 @@ any = t.Any
 
 def NULL_not_found(object: any) -> int:
     if isinstance(object, type(None)):
-        print(f"Nothing = {object} {type(object)}")
-    elif isinstance(object, float) and m.isnan(object):
+        print(f"Nothing: {object} {type(object)}")
+    elif isinstance(object, float) and object != object:
         print(f"Cheese: {object} {type(object)}")
     elif isinstance(object, int) and not isinstance(object, bool)\
             and object == 0:
@@ -21,7 +20,3 @@ def NULL_not_found(object: any) -> int:
         print("Type not found")
         return 1
     return 0
-
-
-if __name__ == "__main__":
-    pass

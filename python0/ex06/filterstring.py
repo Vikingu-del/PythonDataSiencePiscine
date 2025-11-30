@@ -1,11 +1,10 @@
 from ft_filter import ft_filter
+import sys
 
 
 def validate_args(args: list[str]) -> tuple[list[str], int]:
-    """
-    Argument validation
-    """
-    assert args.__len__() == 2, "the arguments are bad"
+    """Argument validation"""
+    assert len(args) == 2, "the arguments are bad"
     nr = int()
     try:
         nr = int(args[1])
@@ -17,22 +16,17 @@ def validate_args(args: list[str]) -> tuple[list[str], int]:
 
 
 def filter_words(groups: tuple[list[str], int]) -> list[str]:
-    """
-    filter the wrods based on subject rules
-    """
-    return list(ft_filter(lambda x: len(x) > groups[1], groups[0]))
+    """filter the wrods based on subject rules"""
+    return [x for x in groups[0] if len(x) > groups[1]]
 
 
 def main():
-    """
-    main function
-    """
-    # args = s.argv[1:]
-    # try:
-    #     print(list(filter_words(validate_args(args))))
-    # except AssertionError as e:
-    #     print(f"AssertionError: {e}")
-    print(filter.__doc__)
+    """main function"""
+    args = sys.argv[1:]
+    try:
+        print(list(filter_words(validate_args(args))))
+    except AssertionError as e:
+        print(f"AssertionError: {e}")
 
 
 if __name__ == "__main__":

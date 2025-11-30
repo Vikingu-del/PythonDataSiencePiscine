@@ -1,0 +1,223 @@
+import datetime
+import pytz
+
+### naive time
+
+## datetime.date
+
+# d = datetime.date(2016, 7, 24)
+# print(d) # 2016-07-24
+
+# tdayLocaldate = datetime.date.today()
+# print(tdayLocaldate) # 2025-08-30
+
+# tyear = tdayLocaldate.year
+# print(tyear) # 2025
+
+# tmonth = tdayLocaldate.month
+# print(tmonth) # 8
+
+# weekday = tdayLocaldate.weekday() # Monday is 0 and Sunday is 6
+# isoweekday = tdayLocaldate.isoweekday() # Monday is 1 and Sunday is 7
+
+# print("f: weekday: ", weekday) # 5
+# print("f: isoweekday: ", isoweekday) # 6
+
+# tdelta = datetime.timedelta(days=7)
+# print(tdelta)
+# print(d - tdelta) # 2025-09-06
+
+# # date2 = date1 + timedelta
+# # timedelta = date1 (+/-) date2
+
+# bday = datetime.date(2026, 3, 21)
+# tillbday = bday - tdayLocaldate
+# print(tillbday.total_seconds()) # 20332800.0
+
+## datetime.time
+# working with hours minutes seconds microseconds
+# t = datetime.time(9, 30, 42, 100000)
+# print(t)
+# print(t.hour) # 9
+# print(t.minute) # 30
+# print(t.second) # 42
+# print(t.microsecond) # 100000
+
+## datetime.datetime
+# dt = datetime.datetime(2024, 8, 30, 9, 30, 42, 100000)
+# print(dt) # 2024-08-30 09:30:42.100000
+# print(dt.date()) # 2024-08-30
+# print(dt.time()) # 09:30:42.100000
+# print(dt.year) # 2024
+# print(dt.month)
+# print(dt.day)
+# print(dt.hour)
+# print(dt.minute)
+# print(dt.second)
+# print(dt.microsecond)
+
+# tdelta = datetime.timedelta(days=7)
+# print(dt + tdelta) # 2024-09-06 09:30:42.100000
+
+# tdelta = datetime.timedelta(hours=12)
+# print(dt + tdelta) # 2024-08-30 21:30:42.100000
+
+# dt_today = datetime.datetime.today() # returnes the current local date and time with the timezone of the system
+# dt_now = datetime.datetime.now() # is the same as today() but can take a timezone argument
+# dt_utcnow = datetime.datetime.utcnow() # returnes the current UTC date and time without timezone info , gives the current utc time but the timezone is set to None
+# print("today: ", dt_today) # today:  2024-08-30 14:26:51.123456
+# print("now: ", dt_now)
+# print("utcnow: ", dt_utcnow)
+
+
+### Aware time
+## pytz is an external package that can be install via pip (pip install pytz)
+# dt = datetime.datetime(2024, 8, 30, 9, 30, 42, 100000, tzinfo=pytz.UTC)
+# print(dt) # 2024-08-30 09:30:42.100000+00:00
+# dt_now = datetime.datetime.now(tz=pytz.UTC) # the most reliable
+# print("now: ", dt_now) # now:  2024-08-30 12:26:51.123456+00:00
+
+# dt_utcnow = datetime.datetime.utcnow().replace(tzinfo=pytz.UTC)
+# print("utcnow: ", dt_utcnow) # utcnow:  2024-08-30 12:26:51.123456+00:00
+
+# dt_mtn = dt_utcnow.astimezone(pytz.timezone('Europe/Berlin'))
+# print("dt_mtn: ", dt_mtn) # dt_mtn:  2024-08-30 06:26:51.123456-06:00
+
+# for tz in pytz.all_timezones:
+#     print(tz)
+
+# dt_utcnow = datetime.datetime.now(tz=pytz.UTC)
+# print(dt_utcnow)
+
+# dt_mtn = datetime.datetime.now()
+# print(dt_mtn)
+
+# mtn_tz = pytz.timezone('US/Mountain')
+# dt_mtn = mtn_tz.localize(dt_mtn)
+
+# # dt_east = dt_mtn.astimezone(pytz.timezone('US/Eastern'))
+# print(dt_mtn)
+
+## iso format
+dt_mtn = datetime.datetime.now(tz=pytz.timezone('US/Mountain'))
+print(dt_mtn.isoformat()) # 2024-08-30T06:26:51.123456-06:00
+print(dt_mtn.strftime('%B %d, %Y')) # datetime to string
+
+dt_str = 'August 30, 2025'
+dt = datetime.datetime.strptime(dt_str, '%B %d, %Y') # string to datetime
+print(dt)
+
+Required for this to work during studying with setup.py and wheel and etc
+    python setup.py bdist_wheel
+    pip install wheel
+    pip install --upgrade build
+    pip install --upgrade setuptools[core]
+    creating 
+
+
+
+--- ARG PARSE ---
+import argparse, datetime
+
+parser = argparse.ArgumentParser(description='A random prgram that does something')
+parser.add_argument('filename', nargs='*', default='file.txt', help='filename of the file to process')
+parser.add_argument('-c', '--copy', nargs='?', default=1, const=2)#, dest='new_dest' , metavar='N', type=int,  help='Make N copies of the file')
+parser.add_argument('-s', '--something', dest='list_values', action='append_const', const=1)
+parser.add_argument('-o', '--other', dest='list_values', action='append_const', const=2)
+
+parser.add_argument('-v', '--version',action='version', version='%(prog)s 1.0')
+parser.add_argument('-n', '--name', default='file_copy', choices=['name1', 'name2'])
+
+parser.add_argument('-r', '--run', action='extend', nargs='+')
+
+arguments = parser.parse_args()
+print(arguments)
+file = arguments.filename
+
+
+
+.
+├── LICENSE
+├── README.md
+├── build
+│   ├── bdist.linux-x86_64
+│   └── lib
+│       └── count_in_list
+│           └── __init__.py
+├── dist
+│   ├── ft_package-0.0.10-py3-none-any.whl
+│   └── ft_package-0.0.10.tar.gz
+├── ft_package
+│   ├── __init__.py
+│   ├── count_in_list
+│   │   ├── __init__.py
+│   │   ├── src
+│   │   │   └── count_in_list.py
+│   │   └── test
+│   └── ft_package.egg-info
+│       ├── PKG-INFO
+│       ├── SOURCES.txt
+│       ├── dependency_links.txt
+│       ├── requires.txt
+│       └── top_level.txt
+├── pyproject.toml
+├── run.py
+└── setup.py
+
+2 ways to build
+    1. using setuptools with setup.py
+        inside setup.py we can import
+            from setuptools import find_packages, setup
+        function setup is the entry point where you declare metadata and build configuration when you’re still using the legacy setup.py system
+        Is getting deprecated
+        this are all the attributes that the function can take:
+            (function) def setup(
+                *,
+                name: str = ...,
+                version: str = ...,
+                description: str = ...,
+                long_description: str = ...,
+                author: str = ...,
+                author_email: str = ...,
+                maintainer: str = ...,
+                maintainer_email: str = ...,
+                url: str = ...,
+                download_url: str = ...,
+                packages: list[str] = ...,
+                py_modules: list[str] = ...,
+                scripts: list[str] = ...,
+                ext_modules: list[Extension] = ...,
+                classifiers: list[str] = ...,
+                distclass: type[Distribution] = ...,
+                script_name: str = ...,
+                script_args: list[str] = ...,
+                options: Mapping[str, Incomplete] = ...,
+                license: str = ...,
+                keywords: list[str] | str = ...,
+                platforms: list[str] | str = ...,
+                cmdclass: Mapping[str, type[Command]] = ...,
+                data_files: list[tuple[str, list[str]]] = ...,
+                package_dir: Mapping[str, str] = ...,
+                obsoletes: list[str] = ...,
+                provides: list[str] = ...,
+                requires: list[str] = ...,
+                command_packages: list[str] = ...,
+                command_options: Mapping[str, Mapping[str, tuple[Incomplete, Incomplete]]] = ...,
+                package_data: Mapping[str, list[str]] = ...,
+                include_package_data: bool | Literal[0, 1] = ...,
+                libraries: list[str] = ...,
+                headers: list[str] = ...,
+                ext_package: str = ...,
+                include_dirs: list[str] = ...,
+                password: str = ...,
+                fullname: str = ...,
+                **attrs: Any
+            ) -> Distribution
+
+
+To be able to create your package:
+    1. First we have to choose our build backend.
+        In our case setuptools
+    2. Since we are using setuptools we have to create
+    a pyproject.toml file and specify the requirements and the build-backend
+        

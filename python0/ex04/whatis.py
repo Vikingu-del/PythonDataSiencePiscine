@@ -2,7 +2,7 @@ import sys as s
 
 
 def check_input(object: list[str]) -> int:
-    assert object.__len__() <= 1, 'more than one argument is provided'
+    assert len(object) <= 1, 'more than one argument is provided'
     try:
         number = int(object[0])
         return number
@@ -12,7 +12,7 @@ def check_input(object: list[str]) -> int:
 
 def main():
     arguments = s.argv[1:]
-    if arguments.__len__() == 0:
+    if len(arguments) == 0:
         return
     try:
         if check_input(arguments) % 2 == 0:

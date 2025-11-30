@@ -8,17 +8,10 @@ T = t.TypeVar("T")
 
 
 def ft_filter(function: (c[[T], t.Any]) | None, iterable: i[T]) -> it[T]:
-    """
-    Filters the elements of an iterable for which the given
-    function returns True.
+    """ft_filter(function or None, iterable) --> filter object
 
-    Args:
-        function: A callable that returns True or False for each element.
-        iterable: An iterable of elements to filter.
-
-    Returns:
-        A list of elements for which the function returned True.
-    """
+Return an iterator yielding those items of iterable for which function(item)
+is true. If function is None, return the items that are true."""
     if function is None:
         return (i for i in iterable if i)
     return (i for i in iterable if function(i))

@@ -5,11 +5,12 @@ def check_input(object: list[str]) -> str:
     """
     Checks and validates the arguments
     """
-    na = object.__len__()
+    na = len(object)
     assert na <= 1, 'There are more than 1 argument'
-    if na == 0:
+    if na == 0 or object[0] == '':
         lines = []
         try:
+            na = 0
             while (True):
                 if na == 0:
                     word = input("What is the text to count?")
@@ -29,13 +30,13 @@ def process_input(string: str) -> None:
     characters, upper letters, lower letters, punctuation marks, spaces
     and digits has
     """
-    print(f"The text contains {string.__len__()} characters:")
-    print(f"{[x for x in string if x.isupper()].__len__()} upper letters")
-    print(f"{[x for x in string if x.islower()].__len__()} lower letters")
+    print(f"The text contains {len(string)} characters:")
+    print(f"{len([x for x in string if x.isupper()])} upper letters")
+    print(f"{len([x for x in string if x.islower()])} lower letters")
     punct = [x for x in string if x in '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~']
-    print(f"{punct.__len__()} punctuation marks")
-    print(f"{[x for x in string if x.isspace()].__len__()} spaces")
-    print(f"{[x for x in string if x.isdigit()].__len__()} digits")
+    print(f"{len(punct)} punctuation marks")
+    print(f"{len([x for x in string if x.isspace()])} spaces")
+    print(f"{len([x for x in string if x.isdigit()])} digits")
 
 
 def main():
@@ -45,6 +46,7 @@ def main():
     args = sys.argv[1:]
     try:
         string = check_input(args)
+        # print(f"string: {string}")
         process_input(string)
     except AssertionError as e:
         print(f"AssertionError: {e}")
